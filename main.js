@@ -1,27 +1,31 @@
 const {
-	TelegramClient
-} = require("telegram");
+    TelegramClient,
+    Api
+} = require('telegram')
 const {
-	StringSession
-} = require("telegram/sessions");
+    StringSession
+} = require('telegram/sessions')
+const hotload = require('hotload')
 
-const api_id = 7720791;
-const api_hash = "feeaaf0e8926bc0a465f12d9516f4f98";
-//const stringSession = new StringSession(""); // fill this later with the value from session.save()
-const phone = '+919479357281'
-const username = '@SarK283'
 
-const client = new TelegramClient(username, api_id, api_hash)
-client.connect()
+const scriptFilePath = './script.js'
 
-if (!client.is_user_authorized()) {
-	client.send_code_request(phone)
-	try {
-		client.sign_in(phone, input('Enter the code: '))
-	}
-	catch {
-		client.sign_in(password = input('Password: '))
-	}
-}
-me = client.get_me()
-print(me)
+const apiId = 7720791
+const apiHash = 'feeaaf0e8926bc0a465f12d9516f4f98'
+const stringSession = new StringSession('1BQANOTEuMTA4LjU2LjIwMAG7DKOtZiK4z7Zup7nNj8DahL5GPic0ZzWWvEm7BfCQwQxnqCHxFSjcEXJUwdagVw5QeMHeIxRTkshGVQaEVvZn06OpAFormkB/IrBy7xvA9XXdph/BmbxRJY9d0zwCx3evFnd8NBWWoevyFbwbU2n0A/4PB2l1PfmuJc1SxMovt5hRLpaZsP5rFpUpYdKOwtAhsJMe24sLP4YM/KxDICQoRTSt40qzTD0YwZIWq5BoV1wqpycuZujmIRHk1DccFrhBobiJkA45Z+rl3XjTQc9GJ8oxd+n48v3AV1b6SD3I/s7oLUAIVLfj67mcbV2k1YMviho9aTIDUbrw/M09X8EV/Q=='); // fill this later with the value from session.save()
+(async () => {
+    const client = new TelegramClient(stringSession, apiId, apiHash, {
+        connectionRetries: 5
+    })
+    await client.connect()
+    client.floodSleepThreshold = 3000;
+    console.log('Connected.')
+
+    var script = hotload(scriptFilePath, (file) => {
+        try {
+            file.main(client)
+        } catch (e) {
+            console.error(e);
+        }
+    })
+})()
