@@ -21,7 +21,7 @@ const stringSession = new StringSession('1BQANOTEuMTA4LjU2LjIwMAG7DKOtZiK4z7Zup7
     client.floodSleepThreshold = 3000;
     console.log('Connected.')
 
-    var script = hotload(scriptFilePath, (file) => {
+    hotload(scriptFilePath, (file) => {
         try {
             file.main(client)
         } catch (e) {

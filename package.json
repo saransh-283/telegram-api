@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/saransh-283/telegram-api#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "hotload": "^0.0.5",
     "input": "^1.0.1",
-    "telegram": "^1.8.13"
+    "telegram": "^1.8.13",
+    "zombie": "^6.1.4"
   }
 }
