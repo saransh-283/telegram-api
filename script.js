@@ -2,8 +2,11 @@ const {
     Api,
     TelegramClient
 } = require("telegram");
-const Browser = require('zombie')
-
+var cloudscraper = require('cloudscraper');
+const {
+    MessageButton
+} = require('telegram/tl/custom/messageButton');
+const Message = require('telegram/client/messages')
 
 const sleep = (s) => {
     return new Promise((res) => {
@@ -35,11 +38,7 @@ const end = async (action, entity) => {
 }
 
 const channel_name = "@Litecoin_click_bot"
-const userAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0"
-const browser = new Browser({
-    userAgent,
-    waitFor: 10000
-})
+
 const main = (client = new TelegramClient()) => {
     console.log('----------------------------------------------------------------------------');
     var currDate = new Date()
@@ -67,12 +66,13 @@ const main = (client = new TelegramClient()) => {
                 end('Visit Sites', channel_entity)
             } else {
                 try {
-                    var url = posts.messages[0].replyMarkup.rows[0].buttons[0].url
+                    var btn = posts.messages[0].replyMarkup.rows[0].buttons[0]
                     var id = posts.messages[0].id
-                    console.log(`Visiting ${url}`)
-                    browser.visit(url, () => {
-                        console.log(browser.statusCode);
-                    })
+                    var btnCustom = new MessageButton(client, btn, channel_entity, channel_name, id)
+                    var url = await btnCustom.url
+                    await btnCustom.click({})
+                    cloudscraper.get(url)
+                        .then(ok => console.log('Done'), err => console.error(err))
                 } catch (e) {
                     console.error(e);
                 }

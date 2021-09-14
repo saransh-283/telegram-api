@@ -1,27 +1,27 @@
 {
-  "name": "telegram-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/saransh-283/telegram-api.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/saransh-283/telegram-api/issues"
-  },
-  "homepage": "https://github.com/saransh-283/telegram-api#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "hotload": "^0.0.5",
-    "input": "^1.0.1",
-    "telegram": "^1.8.13",
-    "zombie": "^6.1.4"
-  }
+    "name": "telegram-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/saransh-283/telegram-api.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/saransh-283/telegram-api/issues"
+    },
+    "homepage": "https://github.com/saransh-283/telegram-api#readme",
+    "dependencies": {
+        "cloudscraper": "^4.6.0",
+        "hotload": "^0.0.5",
+        "input": "^1.0.1",
+        "request": "^2.88.2",
+        "telegram": "^1.8.13"
+    }
 }
